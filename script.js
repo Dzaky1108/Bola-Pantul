@@ -26,7 +26,7 @@ const paddle = {
 let score = 0;
 
 // Variabel status game
-let gameRunning = true; // Menambahkan variabel untuk status game
+let gameRunning = true;
 
 // Event listener untuk kontrol keyboard
 document.addEventListener('keydown', keyDownHandler, false);
@@ -49,6 +49,21 @@ function keyUpHandler(e) {
         paddle.leftPressed = false;
     }
 }
+
+// 🎮 Kontrol tombol sentuh dan klik dari HTML
+const leftButton = document.getElementById("leftButton");
+const rightButton = document.getElementById("rightButton");
+
+// Tambahkan event listener tombol kiri/kanan
+leftButton.addEventListener("touchstart", () => paddle.leftPressed = true);
+leftButton.addEventListener("touchend", () => paddle.leftPressed = false);
+rightButton.addEventListener("touchstart", () => paddle.rightPressed = true);
+rightButton.addEventListener("touchend", () => paddle.rightPressed = false);
+
+leftButton.addEventListener("mousedown", () => paddle.leftPressed = true);
+leftButton.addEventListener("mouseup", () => paddle.leftPressed = false);
+rightButton.addEventListener("mousedown", () => paddle.rightPressed = true);
+rightButton.addEventListener("mouseup", () => paddle.rightPressed = false);
 
 // Fungsi untuk menggambar bola
 function drawBall() {
@@ -82,14 +97,14 @@ function resetGame() {
     paddle.x = (canvas.width - paddle.width) / 2;
     score = 0;
     scoreElement.textContent = score;
-    restartButton.style.display = 'none'; // Sembunyikan tombol restart saat game dimulai
-    gameRunning = true; // Mengubah status game ke "berjalan"
-    gameLoop(); // Mulai permainan
+    restartButton.style.display = 'none';
+    gameRunning = true;
+    gameLoop();
 }
 
 // Fungsi untuk mengupdate elemen game
 function update() {
-    if (!gameRunning) return; // Hentikan update jika game sudah berakhir
+    if (!gameRunning) return;
 
     // Gerakan papan
     if (paddle.rightPressed && paddle.x < canvas.width - paddle.width) {
@@ -116,16 +131,16 @@ function update() {
     if (ball.y + ball.radius > canvas.height - paddle.height) {
         if (ball.x > paddle.x && ball.x < paddle.x + paddle.width) {
             ball.speedY = -ball.speedY;
-            score++; // Nambah skor setiap kena papan
+            score++;
             scoreElement.textContent = score;
         } else if (ball.y + ball.radius > canvas.height) {
-            gameRunning = false; // Menghentikan permainan saat bola melewati papan
-            restartButton.style.display = 'block'; // Tampilkan tombol restart saat game over
+            gameRunning = false;
+            restartButton.style.display = 'block';
         }
     }
 
     // Gambar ulang bola dan papan
-    ctx.clearRect(0, 0, canvas.width, canvas.height); // Bersihkan canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBall();
     drawPaddle();
 }
@@ -134,12 +149,12 @@ function update() {
 function gameLoop() {
     update();
     if (gameRunning) {
-        requestAnimationFrame(gameLoop); // Lanjutkan loop jika game sedang berjalan
+        requestAnimationFrame(gameLoop);
     }
 }
 
-// Menangani klik pada tombol restart
+// Tombol restart
 restartButton.addEventListener('click', resetGame);
 
-// Memulai permainan
+// Mulai game
 gameLoop();
