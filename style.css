@@ -54,3 +54,26 @@ p {
     
     3, 149, 41);
 }
+#touch-controls {
+    margin-top: 15px;
+    text-align: center;
+}
+
+#touch-controls button {
+    background: linear-gradient(45deg, #ffcc00, #ff6a00);
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    margin: 0 10px;
+    font-size: 18px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+#touch-controls button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
