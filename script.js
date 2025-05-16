@@ -50,7 +50,7 @@ function keyUpHandler(e) {
     }
 }
 
-// 🎮 Kontrol tombol sentuh dan klik dari HTML
+//  Kontrol tombol sentuh dan 
 const leftButton = document.getElementById("leftButton");
 const rightButton = document.getElementById("rightButton");
 
